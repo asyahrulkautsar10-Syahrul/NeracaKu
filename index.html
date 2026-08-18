@@ -3,585 +3,1806 @@
 
 <head>
 
-<link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
 
-<meta name="theme-color" content="#111827">
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color"
+      content="#111827">
 
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable"
+      content="yes">
 
-<meta name="apple-mobile-web-app-title" content="NeracaKu">
+<meta name="apple-mobile-web-app-capable"
+      content="yes">
 
-<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-status-bar-style"
+      content="default">
 
-  <meta charset="UTF-8">
+<meta name="apple-mobile-web-app-title"
+      content="NeracaKu">
 
-  <meta
-    name="viewport"
-    content="width=device-width,
-             initial-scale=1.0,
-             maximum-scale=1.0,
-             user-scalable=no,
-             viewport-fit=cover"
-  >
+<title>NeracaKu</title>
 
-  <meta
-    name="theme-color"
-    content="#111827"
-  >
 
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
+<link rel="manifest"
+      href="manifest.json">
 
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
 
-  <meta
-    name="apple-mobile-web-app-title"
-    content="NeracaKu"
-  >
+<style>
 
-  <meta
-    name="mobile-web-app-capable"
-    content="yes"
-  >
+/* =========================================================
+   RESET
+========================================================= */
 
-  <meta
-    name="application-name"
-    content="NeracaKu"
-  >
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  <meta
-    name="description"
-    content="NeracaKu - Personal Finance"
-  >
 
-  <link
-    rel="manifest"
-    href="manifest.json"
-  >
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
 
-  <link
-    rel="apple-touch-icon"
-    href="icon-192.png"
-  >
 
-  <title>NeracaKu</title>
+body {
 
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
 
-  <style>
+  background:
+    #f3f4f6;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  color:
+    #111827;
 
+  padding-bottom:
+    90px;
 
-    html,
-    body {
+}
 
-      width: 100%;
-      height: 100%;
 
-      overflow: hidden;
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
 
-      background: #111827;
 
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
+/* =========================================================
+   DARK MODE
+========================================================= */
 
-    }
+body.dark {
 
+  background:
+    #0b1120;
 
-    body {
+  color:
+    #f9fafb;
 
-      padding:
-        env(safe-area-inset-top)
-        env(safe-area-inset-right)
-        env(safe-area-inset-bottom)
-        env(safe-area-inset-left);
+}
 
-    }
 
+body.dark .card,
+body.dark .modal,
+body.dark .bottom-nav,
+body.dark .transaction-card,
+body.dark .profile-card {
 
-    #app {
+  background:
+    #111827;
 
-      width: 100%;
-      height: 100%;
+  color:
+    #f9fafb;
 
-      position: relative;
+}
 
-      background: #ffffff;
 
-      overflow: hidden;
+body.dark input,
+body.dark select,
+body.dark textarea {
 
-    }
+  background:
+    #1f2937;
 
+  color:
+    #ffffff;
 
-    #webapp {
+  border-color:
+    #374151;
 
-      width: 100%;
-      height: 100%;
+}
 
-      border: none;
 
-      display: block;
+body.dark .muted {
+  color:
+    #9ca3af;
+}
 
-      background: #ffffff;
 
-    }
+body.dark .nav-item {
+  color:
+    #9ca3af;
+}
 
 
-    /* =====================================================
-       LOADING SCREEN
-       ===================================================== */
+/* =========================================================
+   LOADING
+========================================================= */
 
-    #loading {
+#loadingScreen {
 
-      position: fixed;
+  position: fixed;
 
-      inset: 0;
+  inset: 0;
 
-      z-index: 9999;
+  z-index: 9999;
 
-      display: flex;
+  display: flex;
 
-      align-items: center;
+  flex-direction: column;
 
-      justify-content: center;
+  justify-content: center;
 
-      flex-direction: column;
+  align-items: center;
 
-      background:
-        linear-gradient(
-          145deg,
-          #111827,
-          #1f2937
-        );
+  background:
+    linear-gradient(
+      145deg,
+      #111827,
+      #1f2937
+    );
 
-      color: #ffffff;
+  color:
+    #ffffff;
 
-      transition:
-        opacity .35s ease,
-        visibility .35s ease;
+}
 
-    }
 
+.loading-logo {
 
-    #loading.hide {
+  width:
+    78px;
 
-      opacity: 0;
+  height:
+    78px;
 
-      visibility: hidden;
+  border-radius:
+    22px;
 
-      pointer-events: none;
+  background:
+    rgba(255,255,255,.12);
 
-    }
+  display:
+    flex;
 
+  align-items:
+    center;
 
-    .logo {
+  justify-content:
+    center;
 
-      width: 72px;
-      height: 72px;
+  margin-bottom:
+    20px;
 
-      border-radius: 22px;
+  overflow:
+    hidden;
 
-      display: flex;
+}
 
-      align-items: center;
-      justify-content: center;
 
-      background: #ffffff;
+.loading-logo img {
 
-      color: #111827;
+  width:
+    100%;
 
-      font-size: 30px;
+  height:
+    100%;
 
-      font-weight: 800;
+  object-fit:
+    contain;
 
-      margin-bottom: 18px;
+}
 
-      box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.25);
 
-    }
+.loading-title {
 
+  font-size:
+    26px;
 
-    .app-name {
+  font-weight:
+    800;
 
-      font-size: 24px;
+  margin-bottom:
+    6px;
 
-      font-weight: 800;
+}
 
-      letter-spacing: -.5px;
 
-      margin-bottom: 8px;
+.loading-text {
 
-    }
+  opacity:
+    .65;
 
+  font-size:
+    14px;
 
-    .loading-text {
+}
 
-      font-size: 13px;
 
-      opacity: .7;
+.spinner {
 
-    }
+  width:
+    28px;
 
+  height:
+    28px;
 
-    .loader {
+  border:
+    3px solid rgba(255,255,255,.25);
 
-      width: 28px;
-      height: 28px;
+  border-top-color:
+    #ffffff;
 
-      border-radius: 50%;
+  border-radius:
+    50%;
 
-      border: 3px solid
-        rgba(255,255,255,.2);
+  animation:
+    spin .8s linear infinite;
 
-      border-top-color: #ffffff;
+  margin-top:
+    22px;
 
-      animation:
-        spin .8s linear infinite;
+}
 
-      margin-top: 20px;
 
-    }
+@keyframes spin {
 
+  to {
+    transform: rotate(360deg);
+  }
 
-    @keyframes spin {
+}
 
-      to {
-        transform: rotate(360deg);
-      }
 
-    }
+/* =========================================================
+   APP
+========================================================= */
 
+#app {
 
-    /* =====================================================
-       ERROR SCREEN
-       ===================================================== */
+  display:
+    none;
 
-    #error {
+  width:
+    100%;
 
-      display: none;
+  max-width:
+    600px;
 
-      position: fixed;
+  margin:
+    auto;
 
-      inset: 0;
+}
 
-      z-index: 10000;
 
-      padding: 30px;
+/* =========================================================
+   HEADER
+========================================================= */
 
-      align-items: center;
+.header {
 
-      justify-content: center;
+  padding:
+    20px 18px 10px;
 
-      flex-direction: column;
+}
 
-      text-align: center;
 
-      background: #ffffff;
+.header-top {
 
-    }
+  display:
+    flex;
 
+  justify-content:
+    space-between;
 
-    #error.show {
+  align-items:
+    center;
 
-      display: flex;
+}
 
-    }
 
+.brand {
 
-    .error-icon {
+  display:
+    flex;
 
-      font-size: 52px;
+  align-items:
+    center;
 
-      margin-bottom: 18px;
+  gap:
+    11px;
 
-    }
+}
 
 
-    .error-title {
+.brand-logo {
 
-      font-size: 22px;
+  width:
+    42px;
 
-      font-weight: 800;
+  height:
+    42px;
 
-      color: #111827;
+  border-radius:
+    13px;
 
-      margin-bottom: 10px;
+  object-fit:
+    contain;
 
-    }
+  background:
+    #ffffff;
 
+  box-shadow:
+    0 5px 16px rgba(0,0,0,.08);
 
-    .error-description {
+}
 
-      max-width: 320px;
 
-      font-size: 14px;
+.brand-name {
 
-      line-height: 1.6;
+  font-size:
+    21px;
 
-      color: #6b7280;
+  font-weight:
+    800;
 
-      margin-bottom: 22px;
+}
 
-    }
 
+.greeting {
 
-    .retry-button {
+  font-size:
+    13px;
 
-      border: none;
+  color:
+    #6b7280;
 
-      background: #111827;
+  margin-top:
+    2px;
 
-      color: #ffffff;
+}
 
-      padding: 13px 22px;
 
-      border-radius: 12px;
+.profile-button {
 
-      font-size: 14px;
+  width:
+    42px;
 
-      font-weight: 700;
+  height:
+    42px;
 
-      cursor: pointer;
+  border:
+    none;
 
-    }
+  border-radius:
+    50%;
 
+  background:
+    #111827;
 
-    /* =====================================================
-       IOS INSTALL GUIDE
-       ===================================================== */
+  color:
+    #ffffff;
 
-    #ios-guide {
+  font-size:
+    18px;
 
-      display: none;
+}
 
-      position: fixed;
 
-      inset: 0;
+/* =========================================================
+   MONTH
+========================================================= */
 
-      z-index: 11000;
+.month-wrapper {
 
-      background:
-        rgba(0,0,0,.55);
+  padding:
+    4px 18px 14px;
 
-      align-items: flex-end;
+}
 
-      justify-content: center;
 
-    }
+.month-input {
 
+  width:
+    100%;
 
-    #ios-guide.show {
+  border:
+    none;
 
-      display: flex;
+  background:
+    transparent;
 
-    }
+  font-size:
+    15px;
 
+  font-weight:
+    700;
 
-    .ios-box {
+  color:
+    inherit;
 
-      width: 100%;
+  outline:
+    none;
 
-      max-width: 520px;
+}
 
-      background: #ffffff;
 
-      border-radius:
-        24px 24px 0 0;
+/* =========================================================
+   BALANCE CARD
+========================================================= */
 
-      padding:
-        24px
-        22px
-        calc(24px + env(safe-area-inset-bottom));
+.balance-card {
 
-      animation:
-        slideUp .25s ease;
+  margin:
+    0 18px 16px;
 
-    }
+  padding:
+    22px;
 
+  border-radius:
+    25px;
 
-    @keyframes slideUp {
+  color:
+    #ffffff;
 
-      from {
+  background:
+    linear-gradient(
+      145deg,
+      #111827,
+      #374151
+    );
 
-        transform:
-          translateY(100%);
+  box-shadow:
+    0 15px 35px
+    rgba(17,24,39,.20);
 
-      }
+}
 
-      to {
 
-        transform:
-          translateY(0);
+.balance-label {
 
-      }
+  font-size:
+    13px;
 
-    }
+  opacity:
+    .7;
 
+}
 
-    .ios-title {
 
-      font-size: 20px;
+.balance-value {
 
-      font-weight: 800;
+  font-size:
+    clamp(29px, 8vw, 39px);
 
-      color: #111827;
+  font-weight:
+    800;
 
-      margin-bottom: 10px;
+  margin:
+    8px 0 20px;
 
-    }
+  letter-spacing:
+    -.8px;
 
+}
 
-    .ios-text {
 
-      color: #6b7280;
+.balance-row {
 
-      font-size: 14px;
+  display:
+    grid;
 
-      line-height: 1.6;
+  grid-template-columns:
+    1fr 1fr;
 
-      margin-bottom: 18px;
+  gap:
+    12px;
 
-    }
+}
 
 
-    .ios-step {
+.balance-mini {
 
-      display: flex;
+  padding:
+    13px;
 
-      gap: 12px;
+  border-radius:
+    16px;
 
-      margin-bottom: 13px;
+  background:
+    rgba(255,255,255,.09);
 
-      color: #374151;
+}
 
-      font-size: 14px;
 
-      line-height: 1.5;
+.balance-mini-label {
 
-    }
+  font-size:
+    11px;
 
+  opacity:
+    .65;
 
-    .ios-number {
+}
 
-      width: 26px;
-      height: 26px;
 
-      min-width: 26px;
+.balance-mini-value {
 
-      display: flex;
+  font-size:
+    15px;
 
-      align-items: center;
-      justify-content: center;
+  font-weight:
+    700;
 
-      border-radius: 50%;
+  margin-top:
+    5px;
 
-      background: #111827;
+}
 
-      color: #ffffff;
 
-      font-weight: 700;
+/* =========================================================
+   CONTENT
+========================================================= */
 
-    }
+.section {
 
+  padding:
+    0 18px;
 
-    .close-guide {
+}
 
-      width: 100%;
 
-      border: none;
+.section-title {
 
-      background: #111827;
+  display:
+    flex;
 
-      color: #ffffff;
+  justify-content:
+    space-between;
 
-      padding: 14px;
+  align-items:
+    center;
 
-      border-radius: 13px;
+  margin:
+    18px 0 10px;
 
-      font-weight: 700;
+}
 
-      font-size: 14px;
 
-      margin-top: 10px;
+.section-title h3 {
 
-    }
+  font-size:
+    17px;
 
+}
 
-    /* =====================================================
-       OFFLINE MESSAGE
-       ===================================================== */
 
-    #offline {
+.muted {
 
-      position: fixed;
+  color:
+    #6b7280;
 
-      left: 50%;
+  font-size:
+    12px;
 
-      bottom:
-        calc(
-          18px +
-          env(safe-area-inset-bottom)
-        );
+}
 
-      transform:
-        translateX(-50%)
-        translateY(100px);
 
-      z-index: 12000;
+/* =========================================================
+   QUICK CARDS
+========================================================= */
 
-      background: #111827;
+.quick-grid {
 
-      color: #ffffff;
+  display:
+    grid;
 
-      padding: 11px 16px;
+  grid-template-columns:
+    repeat(2, 1fr);
 
-      border-radius: 12px;
+  gap:
+    12px;
 
-      font-size: 12px;
+}
 
-      font-weight: 600;
 
-      box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.25);
+.card {
 
-      transition:
-        transform .3s ease;
+  background:
+    #ffffff;
 
-      white-space: nowrap;
+  border-radius:
+    20px;
 
-    }
+  padding:
+    17px;
 
+  box-shadow:
+    0 6px 20px
+    rgba(0,0,0,.05);
 
-    #offline.show {
+}
 
-      transform:
-        translateX(-50%)
-        translateY(0);
 
-    }
+.quick-icon {
 
+  width:
+    37px;
 
-  </style>
+  height:
+    37px;
+
+  border-radius:
+    12px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  font-size:
+    18px;
+
+  margin-bottom:
+    12px;
+
+}
+
+
+.icon-income {
+
+  background:
+    #dcfce7;
+
+  color:
+    #15803d;
+
+}
+
+
+.icon-expense {
+
+  background:
+    #fee2e2;
+
+  color:
+    #dc2626;
+
+}
+
+
+.icon-budget {
+
+  background:
+    #dbeafe;
+
+  color:
+    #2563eb;
+
+}
+
+
+.icon-trans {
+
+  background:
+    #fef3c7;
+
+  color:
+    #d97706;
+
+}
+
+
+.quick-label {
+
+  color:
+    #6b7280;
+
+  font-size:
+    12px;
+
+}
+
+
+.quick-value {
+
+  margin-top:
+    5px;
+
+  font-weight:
+    800;
+
+  font-size:
+    16px;
+
+}
+
+
+/* =========================================================
+   BUDGET
+========================================================= */
+
+.budget-card {
+
+  margin-top:
+    12px;
+
+}
+
+
+.budget-header {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+}
+
+
+.budget-value {
+
+  font-weight:
+    800;
+
+}
+
+
+.progress {
+
+  height:
+    8px;
+
+  background:
+    #e5e7eb;
+
+  border-radius:
+    20px;
+
+  margin-top:
+    13px;
+
+  overflow:
+    hidden;
+
+}
+
+
+body.dark .progress {
+
+  background:
+    #374151;
+
+}
+
+
+.progress-bar {
+
+  height:
+    100%;
+
+  width:
+    0%;
+
+  background:
+    #111827;
+
+  border-radius:
+    inherit;
+
+  transition:
+    width .4s ease;
+
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.category-list {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    9px;
+
+}
+
+
+.category-item {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  padding:
+    13px 14px;
+
+  border-radius:
+    16px;
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.04);
+
+}
+
+
+body.dark .category-item {
+
+  background:
+    #111827;
+
+}
+
+
+.category-left {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+}
+
+
+.category-dot {
+
+  width:
+    10px;
+
+  height:
+    10px;
+
+  border-radius:
+    50%;
+
+  background:
+    #111827;
+
+}
+
+
+.category-name {
+
+  font-size:
+    13px;
+
+  font-weight:
+    600;
+
+}
+
+
+.category-amount {
+
+  font-size:
+    13px;
+
+  font-weight:
+    800;
+
+}
+
+
+/* =========================================================
+   TRANSACTIONS
+========================================================= */
+
+.transaction-list {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    9px;
+
+}
+
+
+.transaction-card {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  padding:
+    14px;
+
+  background:
+    #ffffff;
+
+  border-radius:
+    18px;
+
+  box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.04);
+
+}
+
+
+.transaction-icon {
+
+  width:
+    42px;
+
+  height:
+    42px;
+
+  border-radius:
+    14px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex-shrink:
+    0;
+
+}
+
+
+.transaction-info {
+
+  flex:
+    1;
+
+  min-width:
+    0;
+
+}
+
+
+.transaction-category {
+
+  font-size:
+    13px;
+
+  font-weight:
+    700;
+
+}
+
+
+.transaction-note {
+
+  font-size:
+    11px;
+
+  color:
+    #6b7280;
+
+  margin-top:
+    3px;
+
+  white-space:
+    nowrap;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+}
+
+
+.transaction-amount {
+
+  text-align:
+    right;
+
+  font-size:
+    13px;
+
+  font-weight:
+    800;
+
+}
+
+
+.income {
+
+  color:
+    #15803d;
+
+}
+
+
+.expense {
+
+  color:
+    #dc2626;
+
+}
+
+
+.transaction-date {
+
+  font-size:
+    10px;
+
+  color:
+    #9ca3af;
+
+  margin-top:
+    3px;
+
+}
+
+
+/* =========================================================
+   FAB
+========================================================= */
+
+.fab {
+
+  position:
+    fixed;
+
+  right:
+    20px;
+
+  bottom:
+    78px;
+
+  width:
+    58px;
+
+  height:
+    58px;
+
+  border:
+    none;
+
+  border-radius:
+    19px;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+
+  font-size:
+    27px;
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,0,0,.25);
+
+  z-index:
+    100;
+
+}
+
+
+@media(min-width:601px) {
+
+  .fab {
+
+    right:
+      calc(
+        50% - 280px
+      );
+
+  }
+
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-nav {
+
+  position:
+    fixed;
+
+  bottom:
+    0;
+
+  left:
+    50%;
+
+  transform:
+    translateX(-50%);
+
+  width:
+    100%;
+
+  max-width:
+    600px;
+
+  height:
+    68px;
+
+  background:
+    rgba(255,255,255,.96);
+
+  backdrop-filter:
+    blur(18px);
+
+  border-top:
+    1px solid #e5e7eb;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  z-index:
+    99;
+
+}
+
+
+body.dark .bottom-nav {
+
+  background:
+    rgba(17,24,39,.96);
+
+  border-color:
+    #374151;
+
+}
+
+
+.nav-item {
+
+  border:
+    none;
+
+  background:
+    transparent;
+
+  color:
+    #6b7280;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    3px;
+
+  font-size:
+    10px;
+
+}
+
+
+.nav-item span:first-child {
+
+  font-size:
+    20px;
+
+}
+
+
+.nav-item.active {
+
+  color:
+    #111827;
+
+  font-weight:
+    700;
+
+}
+
+
+body.dark .nav-item.active {
+
+  color:
+    #ffffff;
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
+  display:
+    none;
+
+}
+
+
+.page.active {
+
+  display:
+    block;
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay {
+
+  display:
+    none;
+
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  background:
+    rgba(0,0,0,.55);
+
+  z-index:
+    500;
+
+  align-items:
+    flex-end;
+
+}
+
+
+.modal-overlay.show {
+
+  display:
+    flex;
+
+}
+
+
+.modal {
+
+  width:
+    100%;
+
+  max-width:
+    600px;
+
+  margin:
+    auto;
+
+  background:
+    #ffffff;
+
+  border-radius:
+    27px 27px 0 0;
+
+  padding:
+    22px 18px 30px;
+
+  max-height:
+    90vh;
+
+  overflow-y:
+    auto;
+
+}
+
+
+.modal-title {
+
+  font-size:
+    19px;
+
+  font-weight:
+    800;
+
+  margin-bottom:
+    18px;
+
+}
+
+
+.form-group {
+
+  margin-bottom:
+    13px;
+
+}
+
+
+.form-label {
+
+  display:
+    block;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+
+  margin-bottom:
+    7px;
+
+}
+
+
+.form-control {
+
+  width:
+    100%;
+
+  padding:
+    13px 14px;
+
+  border:
+    1px solid #e5e7eb;
+
+  border-radius:
+    14px;
+
+  outline:
+    none;
+
+  background:
+    #ffffff;
+
+  color:
+    #111827;
+
+  font-size:
+    14px;
+
+}
+
+
+.form-control:focus {
+
+  border-color:
+    #111827;
+
+}
+
+
+.form-actions {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    10px;
+
+  margin-top:
+    18px;
+
+}
+
+
+.btn {
+
+  border:
+    none;
+
+  padding:
+    14px;
+
+  border-radius:
+    14px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+}
+
+
+.btn-primary {
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+
+}
+
+
+.btn-secondary {
+
+  background:
+    #e5e7eb;
+
+  color:
+    #111827;
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-card {
+
+  background:
+    #ffffff;
+
+  border-radius:
+    22px;
+
+  padding:
+    22px;
+
+  text-align:
+    center;
+
+  box-shadow:
+    0 7px 22px
+    rgba(0,0,0,.05);
+
+}
+
+
+.profile-avatar {
+
+  width:
+    72px;
+
+  height:
+    72px;
+
+  border-radius:
+    50%;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+
+  margin:
+    0 auto 12px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  font-size:
+    26px;
+
+  font-weight:
+    800;
+
+}
+
+
+.profile-name {
+
+  font-size:
+    19px;
+
+  font-weight:
+    800;
+
+}
+
+
+.profile-email {
+
+  color:
+    #6b7280;
+
+  font-size:
+    12px;
+
+  margin-top:
+    4px;
+
+}
+
+
+.profile-menu {
+
+  margin-top:
+    15px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    9px;
+
+}
+
+
+.profile-menu button {
+
+  width:
+    100%;
+
+  padding:
+    14px;
+
+  border:
+    none;
+
+  border-radius:
+    15px;
+
+  background:
+    #f3f4f6;
+
+  color:
+    inherit;
+
+  text-align:
+    left;
+
+  font-weight:
+    700;
+
+}
+
+
+body.dark .profile-menu button {
+
+  background:
+    #1f2937;
+
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty {
+
+  text-align:
+    center;
+
+  padding:
+    30px 10px;
+
+  color:
+    #9ca3af;
+
+  font-size:
+    13px;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+#toast {
+
+  position:
+    fixed;
+
+  left:
+    50%;
+
+  bottom:
+    85px;
+
+  transform:
+    translateX(-50%)
+    translateY(20px);
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+
+  padding:
+    12px 17px;
+
+  border-radius:
+    14px;
+
+  font-size:
+    12px;
+
+  opacity:
+    0;
+
+  pointer-events:
+    none;
+
+  transition:
+    .3s;
+
+  z-index:
+    1000;
+
+  max-width:
+    85%;
+
+  text-align:
+    center;
+
+}
+
+
+#toast.show {
+
+  opacity:
+    1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+#errorScreen {
+
+  display:
+    none;
+
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  background:
+    #f3f4f6;
+
+  padding:
+    30px 20px;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  text-align:
+    center;
+
+}
+
+
+.error-box {
+
+  background:
+    #ffffff;
+
+  padding:
+    25px;
+
+  border-radius:
+    22px;
+
+  max-width:
+    400px;
+
+}
+
+
+.error-title {
+
+  font-weight:
+    800;
+
+  font-size:
+    20px;
+
+  margin-bottom:
+    8px;
+
+}
+
+
+.error-text {
+
+  font-size:
+    13px;
+
+  color:
+    #6b7280;
+
+  line-height:
+    1.6;
+
+}
+
+
+</style>
 
 </head>
 
@@ -589,149 +1810,959 @@
 <body>
 
 
-  <div id="app">
+<!-- =======================================================
+     LOADING
+======================================================== -->
 
-    <iframe
-      id="webapp"
-      title="NeracaKu"
-      allow="clipboard-read; clipboard-write"
-      referrerpolicy="strict-origin-when-cross-origin">
-    </iframe>
+<div id="loadingScreen">
 
-  </div>
+  <div class="loading-logo">
 
-
-  <!-- =====================================================
-       LOADING
-       ===================================================== -->
-
-  <div id="loading">
-
-    <div class="logo">
-      N
-    </div>
-
-    <div class="app-name">
-      NeracaKu
-    </div>
-
-    <div class="loading-text">
-      Memuat aplikasi...
-    </div>
-
-    <div class="loader"></div>
+    <img
+      src="logo.png"
+      alt="NeracaKu"
+      onerror="this.style.display='none';">
 
   </div>
 
+  <div class="loading-title">
+    NeracaKu
+  </div>
 
-  <!-- =====================================================
-       ERROR
-       ===================================================== -->
+  <div class="loading-text">
+    Memuat aplikasi...
+  </div>
 
-  <div id="error">
+  <div class="spinner"></div>
 
-    <div class="error-icon">
-      ⚠️
-    </div>
+</div>
+
+
+<!-- =======================================================
+     ERROR
+======================================================== -->
+
+<div id="errorScreen">
+
+  <div class="error-box">
 
     <div class="error-title">
-      NeracaKu tidak dapat dibuka
+      Gagal Memuat NeracaKu
     </div>
 
-    <div class="error-description">
-      Periksa koneksi internet atau pastikan
-      URL Google Apps Script sudah benar.
+    <div
+      id="errorMessage"
+      class="error-text">
+      Terjadi kesalahan saat menghubungkan aplikasi.
     </div>
-
-    <button
-      class="retry-button"
-      onclick="loadApp()">
-      Coba Lagi
-    </button>
 
   </div>
 
-
-  <!-- =====================================================
-       IOS GUIDE
-       ===================================================== -->
-
-  <div id="ios-guide">
-
-    <div class="ios-box">
-
-      <div class="ios-title">
-        📱 Pasang NeracaKu
-      </div>
-
-      <div class="ios-text">
-        Agar NeracaKu tampil seperti aplikasi,
-        tambahkan ke Home Screen iPhone.
-      </div>
+</div>
 
 
-      <div class="ios-step">
+<!-- =======================================================
+     APP
+======================================================== -->
 
-        <div class="ios-number">
-          1
-        </div>
-
-        <div>
-          Buka halaman ini menggunakan
-          <strong>Safari</strong>.
-        </div>
-
-      </div>
+<div id="app">
 
 
-      <div class="ios-step">
+<!-- =======================================================
+     HOME
+======================================================== -->
 
-        <div class="ios-number">
-          2
-        </div>
+<div
+  id="pageHome"
+  class="page active">
+
+
+  <header class="header">
+
+    <div class="header-top">
+
+      <div class="brand">
+
+        <img
+          src="logo.png"
+          class="brand-logo"
+          alt="NeracaKu"
+          onerror="this.style.display='none';">
 
         <div>
-          Tekan tombol
-          <strong>Share / Bagikan</strong>.
-        </div>
 
-      </div>
+          <div class="brand-name">
+            NeracaKu
+          </div>
 
+          <div
+            id="greeting"
+            class="greeting">
+            Selamat datang
+          </div>
 
-      <div class="ios-step">
-
-        <div class="ios-number">
-          3
-        </div>
-
-        <div>
-          Pilih
-          <strong>Add to Home Screen /
-          Tambahkan ke Layar Utama</strong>.
-        </div>
-
-      </div>
-
-
-      <div class="ios-step">
-
-        <div class="ios-number">
-          4
-        </div>
-
-        <div>
-          Tekan <strong>Add /
-          Tambah</strong>.
         </div>
 
       </div>
 
 
       <button
-        class="close-guide"
-        onclick="closeIOSGuide()">
+        class="profile-button"
+        onclick="showPage('profile')">
 
-        Mengerti
+        👤
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <div class="month-wrapper">
+
+    <input
+      id="monthInput"
+      class="month-input"
+      type="month">
+
+  </div>
+
+
+  <!-- BALANCE -->
+
+  <div class="balance-card">
+
+    <div class="balance-label">
+      Saldo Bulan Ini
+    </div>
+
+    <div
+      id="saldo"
+      class="balance-value">
+      Rp 0
+    </div>
+
+
+    <div class="balance-row">
+
+      <div class="balance-mini">
+
+        <div class="balance-mini-label">
+          Pemasukan
+        </div>
+
+        <div
+          id="balanceIncome"
+          class="balance-mini-value">
+          Rp 0
+        </div>
+
+      </div>
+
+
+      <div class="balance-mini">
+
+        <div class="balance-mini-label">
+          Pengeluaran
+        </div>
+
+        <div
+          id="balanceExpense"
+          class="balance-mini-value">
+          Rp 0
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- QUICK -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h3>
+        Ringkasan
+      </h3>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+
+      <div class="card">
+
+        <div class="quick-icon icon-income">
+          ↑
+        </div>
+
+        <div class="quick-label">
+          Pemasukan
+        </div>
+
+        <div
+          id="incomeValue"
+          class="quick-value">
+          Rp 0
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="quick-icon icon-expense">
+          ↓
+        </div>
+
+        <div class="quick-label">
+          Pengeluaran
+        </div>
+
+        <div
+          id="expenseValue"
+          class="quick-value">
+          Rp 0
+        </div>
+
+      </div>
+
+
+      <div
+        class="card"
+        onclick="openBudgetModal()">
+
+        <div class="quick-icon icon-budget">
+          🎯
+        </div>
+
+        <div class="quick-label">
+          Budget Bulanan
+        </div>
+
+        <div
+          id="budgetValue"
+          class="quick-value">
+          Rp 0
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="quick-icon icon-trans">
+          🧾
+        </div>
+
+        <div class="quick-label">
+          Transaksi
+        </div>
+
+        <div
+          id="transactionCount"
+          class="quick-value">
+          0
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- BUDGET -->
+
+    <div class="card budget-card">
+
+      <div class="budget-header">
+
+        <div>
+
+          <div class="quick-label">
+            Penggunaan Budget
+          </div>
+
+          <div
+            id="budgetPercentage"
+            class="budget-value">
+            0%
+          </div>
+
+        </div>
+
+        <button
+          class="btn btn-secondary"
+          style="padding:8px 11px;font-size:11px;"
+          onclick="openBudgetModal()">
+
+          Edit
+
+        </button>
+
+      </div>
+
+
+      <div class="progress">
+
+        <div
+          id="budgetProgress"
+          class="progress-bar">
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- CATEGORY -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h3>
+        Pengeluaran per Kategori
+      </h3>
+
+    </div>
+
+
+    <div
+      id="categoryList"
+      class="category-list">
+
+    </div>
+
+  </section>
+
+
+  <!-- TRANSACTIONS -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h3>
+        Transaksi Terbaru
+      </h3>
+
+      <button
+        class="btn btn-secondary"
+        style="padding:7px 10px;font-size:11px;"
+        onclick="showPage('transactions')">
+
+        Lihat semua
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="recentTransactions"
+      class="transaction-list">
+
+    </div>
+
+  </section>
+
+
+</div>
+
+
+<!-- =======================================================
+     TRANSACTIONS PAGE
+======================================================== -->
+
+<div
+  id="pageTransactions"
+  class="page">
+
+  <header class="header">
+
+    <div class="brand-name">
+      Transaksi
+    </div>
+
+    <div class="greeting">
+      Kelola transaksi keuangan kamu
+    </div>
+
+  </header>
+
+
+  <section class="section">
+
+    <div class="month-wrapper"
+         style="padding:0 0 15px;">
+
+      <input
+        id="transactionMonth"
+        class="month-input"
+        type="month">
+
+    </div>
+
+
+    <div
+      id="allTransactions"
+      class="transaction-list">
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- =======================================================
+     REPORT PAGE
+======================================================== -->
+
+<div
+  id="pageReport"
+  class="page">
+
+  <header class="header">
+
+    <div class="brand-name">
+      Laporan
+    </div>
+
+    <div class="greeting">
+      Ringkasan keuangan bulanan
+    </div>
+
+  </header>
+
+
+  <section class="section">
+
+
+    <div class="card">
+
+      <div class="quick-label">
+        Insight
+      </div>
+
+      <div
+        id="reportInsight"
+        style="
+          font-size:14px;
+          font-weight:700;
+          line-height:1.5;
+          margin-top:7px;
+        ">
+
+        Memuat...
+
+      </div>
+
+    </div>
+
+
+    <div class="quick-grid"
+         style="margin-top:12px;">
+
+      <div class="card">
+
+        <div class="quick-label">
+          Pemasukan
+        </div>
+
+        <div
+          id="reportIncome"
+          class="quick-value">
+          Rp 0
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="quick-label">
+          Pengeluaran
+        </div>
+
+        <div
+          id="reportExpense"
+          class="quick-value">
+          Rp 0
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="quick-label">
+          Saldo
+        </div>
+
+        <div
+          id="reportBalance"
+          class="quick-value">
+          Rp 0
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="quick-label">
+          Budget
+        </div>
+
+        <div
+          id="reportBudget"
+          class="quick-value">
+          Rp 0
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-title">
+
+      <h3>
+        Kategori Terbesar
+      </h3>
+
+    </div>
+
+
+    <div
+      id="reportCategories"
+      class="category-list">
+
+    </div>
+
+
+  </section>
+
+</div>
+
+
+<!-- =======================================================
+     PROFILE PAGE
+======================================================== -->
+
+<div
+  id="pageProfile"
+  class="page">
+
+  <header class="header">
+
+    <div class="brand-name">
+      Profil
+    </div>
+
+    <div class="greeting">
+      Pengaturan akun NeracaKu
+    </div>
+
+  </header>
+
+
+  <section class="section">
+
+
+    <div class="profile-card">
+
+      <div
+        id="profileAvatar"
+        class="profile-avatar">
+        N
+      </div>
+
+      <div
+        id="profileName"
+        class="profile-name">
+        Pengguna
+      </div>
+
+      <div
+        id="profileEmail"
+        class="profile-email">
+        -
+      </div>
+
+
+      <div class="profile-menu">
+
+
+        <button
+          onclick="openBudgetModal()">
+
+          🎯 &nbsp; Atur Budget Bulanan
+
+        </button>
+
+
+        <button
+          onclick="toggleDarkMode()">
+
+          🌙 &nbsp; Mode Tampilan
+
+        </button>
+
+
+        <button
+          onclick="refreshApp()">
+
+          🔄 &nbsp; Refresh Data
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+</div>
+
+
+<!-- =======================================================
+     BOTTOM NAV
+======================================================== -->
+
+<nav class="bottom-nav">
+
+
+  <button
+    id="navHome"
+    class="nav-item active"
+    onclick="showPage('home')">
+
+    <span>
+      🏠
+    </span>
+
+    <span>
+      Beranda
+    </span>
+
+  </button>
+
+
+  <button
+    id="navTransactions"
+    class="nav-item"
+    onclick="showPage('transactions')">
+
+    <span>
+      🧾
+    </span>
+
+    <span>
+      Transaksi
+    </span>
+
+  </button>
+
+
+  <button
+    id="navReport"
+    class="nav-item"
+    onclick="showPage('report')">
+
+    <span>
+      📊
+    </span>
+
+    <span>
+      Laporan
+    </span>
+
+  </button>
+
+
+</nav>
+
+
+<!-- =======================================================
+     FAB
+======================================================== -->
+
+<button
+  class="fab"
+  onclick="openTransactionModal()">
+
+  +
+
+</button>
+
+
+</div>
+
+
+<!-- =======================================================
+     TRANSACTION MODAL
+======================================================== -->
+
+<div
+  id="transactionModal"
+  class="modal-overlay"
+  onclick="closeModalOutside(event)">
+
+  <div class="modal">
+
+    <div class="modal-title">
+
+      <span id="transactionModalTitle">
+        Tambah Transaksi
+      </span>
+
+    </div>
+
+
+    <input
+      id="transactionId"
+      type="hidden">
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Tanggal
+      </label>
+
+      <input
+        id="formTanggal"
+        class="form-control"
+        type="date">
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Tipe
+      </label>
+
+      <select
+        id="formTipe"
+        class="form-control"
+        onchange="loadFormCategories()">
+
+        <option value="">
+          Pilih tipe
+        </option>
+
+        <option value="Pemasukan">
+          Pemasukan
+        </option>
+
+        <option value="Pengeluaran">
+          Pengeluaran
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Kategori
+      </label>
+
+      <select
+        id="formKategori"
+        class="form-control">
+
+        <option value="">
+          Pilih kategori
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Nominal
+      </label>
+
+      <input
+        id="formNominal"
+        class="form-control"
+        type="number"
+        inputmode="numeric"
+        placeholder="0">
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Metode Pembayaran
+      </label>
+
+      <select
+        id="formMetode"
+        class="form-control">
+
+        <option value="Cash">
+          Cash
+        </option>
+
+        <option value="Transfer">
+          Transfer
+        </option>
+
+        <option value="Debit">
+          Debit
+        </option>
+
+        <option value="Credit Card">
+          Credit Card
+        </option>
+
+        <option value="E-Wallet">
+          E-Wallet
+        </option>
+
+        <option value="QRIS">
+          QRIS
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Keterangan
+      </label>
+
+      <textarea
+        id="formKeterangan"
+        class="form-control"
+        rows="3"
+        placeholder="Opsional">
+      </textarea>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeTransactionModal()">
+
+        Batal
+
+      </button>
+
+
+      <button
+        id="saveTransactionButton"
+        class="btn btn-primary"
+        onclick="saveTransaction()">
+
+        Simpan
+
+      </button>
+
+    </div>
+
+
+    <button
+      id="deleteTransactionButton"
+      class="btn"
+      style="
+        display:none;
+        width:100%;
+        margin-top:10px;
+        background:#fee2e2;
+        color:#dc2626;
+      "
+      onclick="deleteCurrentTransaction()">
+
+      Hapus Transaksi
+
+    </button>
+
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     BUDGET MODAL
+======================================================== -->
+
+<div
+  id="budgetModal"
+  class="modal-overlay"
+  onclick="closeModalOutside(event)">
+
+  <div class="modal">
+
+    <div class="modal-title">
+      Budget Bulanan
+    </div>
+
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Budget
+      </label>
+
+      <input
+        id="budgetInput"
+        class="form-control"
+        type="number"
+        inputmode="numeric"
+        placeholder="0">
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeBudgetModal()">
+
+        Batal
+
+      </button>
+
+
+      <button
+        class="btn btn-primary"
+        onclick="saveBudget()">
+
+        Simpan
 
       </button>
 
@@ -739,320 +2770,2153 @@
 
   </div>
 
-
-  <div id="offline">
-    Tidak ada koneksi internet
-  </div>
+</div>
 
 
-  <script>
+<div id="toast"></div>
 
 
-    /* =====================================================
-       KONFIGURASI
-       ===================================================== */
+<script>
 
-    const GAS_WEB_APP_URL =
-      'https://script.google.com/macros/s/AKfycbycDgtIw2OAHQW7qJsSS6WLbPCHwr_YM9n6tqnnvAIcVbCxX3aCvah66yQ-7yTrL7TyKA/exec';
-
-
-    /* =====================================================
-       ELEMENT
-       ===================================================== */
-
-    const iframe =
-      document.getElementById('webapp');
-
-    const loading =
-      document.getElementById('loading');
-
-    const errorBox =
-      document.getElementById('error');
+/* =========================================================
+   CONFIG API
+========================================================= */
 
 
-    /* =====================================================
-       LOAD APP
-       ===================================================== */
+/*
+ * GANTI URL DI BAWAH DENGAN URL WEB APP
+ * GOOGLE APPS SCRIPT KAMU.
+ *
+ * Contoh:
+ *
+ * https://script.google.com/macros/s/XXXXXXXXXXXX/exec
+ */
 
-    function loadApp() {
-
-      errorBox.classList.remove('show');
-
-      loading.classList.remove('hide');
+const API_URL =
+  'PASTE_URL_WEB_APP_GOOGLE_SCRIPT_DI_SINI';
 
 
-      if (
-        !GAS_WEB_APP_URL ||
-        GAS_WEB_APP_URL.indexOf('PASTE_URL') !== -1
-      ) {
+/* =========================================================
+   STATE
+========================================================= */
 
-        loading.classList.add('hide');
+let currentUser = null;
 
-        errorBox.classList.add('show');
+let categories = [];
 
-        return;
+let currentTransactions = [];
+
+let currentPage = 'home';
+
+let editingTransaction = false;
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+
+    initializeTheme();
+
+    setDefaultMonth();
+
+    initializeApp();
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+async function initializeApp() {
+
+  try {
+
+    if (
+      !API_URL ||
+      API_URL.includes(
+        'PASTE_URL'
+      )
+    ) {
+
+      throw new Error(
+        'URL API Google Apps Script belum dimasukkan ke Index.html.'
+      );
+
+    }
+
+
+    await loadUser();
+
+    await loadCategories();
+
+    await loadDashboard();
+
+    document
+      .getElementById(
+        'loadingScreen'
+      )
+      .style.display =
+      'none';
+
+
+    document
+      .getElementById(
+        'app'
+      )
+      .style.display =
+      'block';
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    showError(
+      error.message ||
+      'Gagal memuat aplikasi.'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   JSONP API
+========================================================= */
+
+function apiRequest(
+  action,
+  params = {}
+) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const callbackName =
+        'neracakuCallback_' +
+        Date.now() +
+        '_' +
+        Math.floor(
+          Math.random() *
+          100000
+        );
+
+
+      const query =
+        new URLSearchParams();
+
+
+      query.set(
+        'action',
+        action
+      );
+
+
+      query.set(
+        'callback',
+        callbackName
+      );
+
+
+      Object.keys(
+        params
+      ).forEach(
+        function(key) {
+
+          if (
+            params[key] !==
+            undefined &&
+            params[key] !==
+            null
+          ) {
+
+            query.set(
+              key,
+              params[key]
+            );
+
+          }
+
+        }
+      );
+
+
+      const script =
+        document.createElement(
+          'script'
+        );
+
+
+      let finished = false;
+
+
+      const timeout =
+        setTimeout(
+          function() {
+
+            if (finished) {
+              return;
+            }
+
+            finished = true;
+
+            cleanup();
+
+            reject(
+              new Error(
+                'Server terlalu lama merespons.'
+              )
+            );
+
+          },
+          20000
+        );
+
+
+      function cleanup() {
+
+        clearTimeout(
+          timeout
+        );
+
+
+        try {
+
+          delete window[
+            callbackName
+          ];
+
+        } catch(e) {}
+
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode
+            .removeChild(
+              script
+            );
+
+        }
 
       }
 
 
-      iframe.src =
-        GAS_WEB_APP_URL +
-        '?pwa=1';
+      window[
+        callbackName
+      ] =
+        function(response) {
+
+          if (finished) {
+            return;
+          }
 
 
-      iframe.onload =
-        function() {
+          finished = true;
 
-          setTimeout(
-            function() {
 
-              loading.classList.add('hide');
+          cleanup();
 
-            },
-            700
+
+          if (
+            response &&
+            response.success === false
+          ) {
+
+            reject(
+              new Error(
+                response.error ||
+                'API error.'
+              )
+            );
+
+            return;
+
+          }
+
+
+          resolve(
+            response
           );
 
         };
 
 
-      iframe.onerror =
+      script.onerror =
         function() {
 
-          loading.classList.add('hide');
+          if (finished) {
+            return;
+          }
 
-          errorBox.classList.add('show');
+
+          finished = true;
+
+
+          cleanup();
+
+
+          reject(
+            new Error(
+              'Tidak dapat terhubung ke Google Apps Script.'
+            )
+          );
 
         };
 
-    }
 
+      script.src =
+        API_URL +
+        (
+          API_URL.includes('?')
+            ? '&'
+            : '?'
+        ) +
+        query.toString();
 
-    /* =====================================================
-       SERVICE WORKER
-       ===================================================== */
-
-    if (
-      'serviceWorker'
-      in navigator
-    ) {
-
-      window.addEventListener(
-        'load',
-        function() {
-
-          navigator.serviceWorker
-            .register('./sw.js')
-            .then(
-              function(registration) {
-
-                console.log(
-                  'NeracaKu PWA aktif:',
-                  registration.scope
-                );
-
-              }
-            )
-            .catch(
-              function(error) {
-
-                console.log(
-                  'Service Worker gagal:',
-                  error
-                );
-
-              }
-            );
-
-        }
-      );
-
-    }
-
-
-    /* =====================================================
-       ONLINE / OFFLINE
-       ===================================================== */
-
-    const offline =
-      document.getElementById('offline');
-
-
-    function updateConnection() {
-
-      if (
-        navigator.onLine
-      ) {
-
-        offline.classList.remove(
-          'show'
-        );
-
-      }
-      else {
-
-        offline.classList.add(
-          'show'
-        );
-
-      }
-
-    }
-
-
-    window.addEventListener(
-      'online',
-      updateConnection
-    );
-
-
-    window.addEventListener(
-      'offline',
-      updateConnection
-    );
-
-
-    /* =====================================================
-       IOS DETECTION
-       ===================================================== */
-
-    function isIOS() {
-
-      return (
-        /iPad|iPhone|iPod/.test(
-          navigator.userAgent
-        )
-        &&
-        !window.MSStream
-      );
-
-    }
-
-
-    function isStandalone() {
-
-      return (
-        window.navigator.standalone === true
-        ||
-        window.matchMedia(
-          '(display-mode: standalone)'
-        ).matches
-      );
-
-    }
-
-
-    function showIOSGuide() {
-
-      if (
-        isIOS()
-        &&
-        !isStandalone()
-      ) {
-
-        setTimeout(
-          function() {
-
-            document
-              .getElementById(
-                'ios-guide'
-              )
-              .classList.add(
-                'show'
-              );
-
-          },
-          2500
-        );
-
-      }
-
-    }
-
-
-    function closeIOSGuide() {
 
       document
-        .getElementById(
-          'ios-guide'
-        )
-        .classList.remove(
-          'show'
+        .body
+        .appendChild(
+          script
         );
 
     }
+  );
+
+}
 
 
-    /* =====================================================
-       PREVENT DOUBLE TAP ZOOM
-       ===================================================== */
+/* =========================================================
+   USER
+========================================================= */
 
-    let lastTouchEnd = 0;
+async function loadUser() {
 
-
-    document.addEventListener(
-      'touchend',
-      function(event) {
-
-        const now =
-          Date.now();
+  const response =
+    await apiRequest(
+      'user'
+    );
 
 
-        if (
-          now - lastTouchEnd <= 300
-        ) {
-
-          event.preventDefault();
-
-        }
+  currentUser =
+    response.user;
 
 
-        lastTouchEnd =
-          now;
+  const nama =
+    currentUser.nama ||
+    'Pengguna';
 
-      },
+
+  document
+    .getElementById(
+      'greeting'
+    )
+    .textContent =
+    'Halo, ' +
+    nama;
+
+
+  document
+    .getElementById(
+      'profileName'
+    )
+    .textContent =
+    nama;
+
+
+  document
+    .getElementById(
+      'profileEmail'
+    )
+    .textContent =
+    currentUser.email ||
+    '-';
+
+
+  document
+    .getElementById(
+      'profileAvatar'
+    )
+    .textContent =
+    nama
+      .charAt(0)
+      .toUpperCase();
+
+}
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+async function loadCategories() {
+
+  const response =
+    await apiRequest(
+      'categories'
+    );
+
+
+  categories =
+    response.categories ||
+    [];
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+async function loadDashboard() {
+
+  const month =
+    getSelectedMonth();
+
+
+  const response =
+    await apiRequest(
+      'dashboard',
       {
-        passive: false
+        month:
+          month
       }
     );
 
 
-    /* =====================================================
-       START
-       ===================================================== */
-
-    loadApp();
-
-    updateConnection();
-
-    showIOSGuide();
+  const data =
+    response.data ||
+    {};
 
 
-  <script>
+  renderDashboard(
+    data
+  );
 
-if ('serviceWorker' in navigator) {
 
-  window.addEventListener('load', function() {
+  await loadTransactions(
+    month
+  );
 
-    navigator.serviceWorker
-      .register('./sw.js')
-      .then(function(registration) {
+}
 
-        console.log(
-          'NeracaKu Service Worker aktif:',
-          registration.scope
+
+/* =========================================================
+   RENDER DASHBOARD
+========================================================= */
+
+function renderDashboard(
+  data
+) {
+
+  const saldo =
+    Number(
+      data.saldo
+    ) || 0;
+
+
+  const pemasukan =
+    Number(
+      data.pemasukan
+    ) || 0;
+
+
+  const pengeluaran =
+    Number(
+      data.pengeluaran
+    ) || 0;
+
+
+  const budget =
+    Number(
+      data.budget
+    ) || 0;
+
+
+  const percentage =
+    Number(
+      data.persentaseBudget
+    ) || 0;
+
+
+  document
+    .getElementById(
+      'saldo'
+    )
+    .textContent =
+    formatRupiah(
+      saldo
+    );
+
+
+  document
+    .getElementById(
+      'balanceIncome'
+    )
+    .textContent =
+    formatRupiah(
+      pemasukan
+    );
+
+
+  document
+    .getElementById(
+      'balanceExpense'
+    )
+    .textContent =
+    formatRupiah(
+      pengeluaran
+    );
+
+
+  document
+    .getElementById(
+      'incomeValue'
+    )
+    .textContent =
+    formatRupiah(
+      pemasukan
+    );
+
+
+  document
+    .getElementById(
+      'expenseValue'
+    )
+    .textContent =
+    formatRupiah(
+      pengeluaran
+    );
+
+
+  document
+    .getElementById(
+      'budgetValue'
+    )
+    .textContent =
+    formatRupiah(
+      budget
+    );
+
+
+  document
+    .getElementById(
+      'transactionCount'
+    )
+    .textContent =
+    Number(
+      data.jumlahTransaksi
+    ) || 0;
+
+
+  const safePercentage =
+    Math.min(
+      Math.max(
+        percentage,
+        0
+      ),
+      100
+    );
+
+
+  document
+    .getElementById(
+      'budgetPercentage'
+    )
+    .textContent =
+    percentage.toFixed(1) +
+    '%';
+
+
+  document
+    .getElementById(
+      'budgetProgress'
+    )
+    .style.width =
+    safePercentage +
+    '%';
+
+
+  renderCategories(
+    data.kategori ||
+    []
+  );
+
+}
+
+
+/* =========================================================
+   CATEGORY RENDER
+========================================================= */
+
+function renderCategories(
+  data
+) {
+
+  const container =
+    document
+      .getElementById(
+        'categoryList'
+      );
+
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
+
+    container.innerHTML =
+      '<div class="empty">Belum ada pengeluaran.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    data
+      .slice(
+        0,
+        6
+      )
+      .map(
+        function(item) {
+
+          return `
+
+            <div class="category-item">
+
+              <div class="category-left">
+
+                <div class="category-dot"></div>
+
+                <div class="category-name">
+                  ${escapeHtml(item.kategori)}
+                </div>
+
+              </div>
+
+              <div class="category-amount">
+                ${formatRupiah(item.nominal)}
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join('');
+
+}
+
+
+/* =========================================================
+   TRANSACTIONS
+========================================================= */
+
+async function loadTransactions(
+  month
+) {
+
+  const response =
+    await apiRequest(
+      'transactions',
+      {
+        month:
+          month
+      }
+    );
+
+
+  currentTransactions =
+    response.data ||
+    [];
+
+
+  renderRecentTransactions(
+    currentTransactions
+  );
+
+
+  renderAllTransactions(
+    currentTransactions
+  );
+
+
+  document
+    .getElementById(
+      'transactionMonth'
+    )
+    .value =
+    month;
+
+}
+
+
+/* =========================================================
+   RECENT
+========================================================= */
+
+function renderRecentTransactions(
+  transactions
+) {
+
+  const container =
+    document
+      .getElementById(
+        'recentTransactions'
+      );
+
+
+  const recent =
+    transactions.slice(
+      0,
+      5
+    );
+
+
+  if (
+    recent.length === 0
+  ) {
+
+    container.innerHTML =
+      '<div class="empty">Belum ada transaksi bulan ini.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    recent
+      .map(
+        transactionHtml
+      )
+      .join('');
+
+}
+
+
+/* =========================================================
+   ALL TRANSACTIONS
+========================================================= */
+
+function renderAllTransactions(
+  transactions
+) {
+
+  const container =
+    document
+      .getElementById(
+        'allTransactions'
+      );
+
+
+  if (
+    transactions.length === 0
+  ) {
+
+    container.innerHTML =
+      '<div class="empty">Belum ada transaksi bulan ini.</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    transactions
+      .map(
+        transactionHtml
+      )
+      .join('');
+
+}
+
+
+/* =========================================================
+   TRANSACTION HTML
+========================================================= */
+
+function transactionHtml(
+  item
+) {
+
+  const income =
+    item.tipe ===
+    'Pemasukan';
+
+
+  const icon =
+    income
+      ? '↑'
+      : '↓';
+
+
+  const colorClass =
+    income
+      ? 'income'
+      : 'expense';
+
+
+  return `
+
+    <div
+      class="transaction-card"
+      onclick="editTransaction('${escapeAttribute(item.id)}')">
+
+      <div
+        class="transaction-icon"
+        style="
+          background:${income
+            ? '#dcfce7'
+            : '#fee2e2'};
+          color:${income
+            ? '#15803d'
+            : '#dc2626'};
+        ">
+
+        ${icon}
+
+      </div>
+
+
+      <div class="transaction-info">
+
+        <div class="transaction-category">
+          ${escapeHtml(item.kategori)}
+        </div>
+
+        <div class="transaction-note">
+          ${escapeHtml(
+            item.keterangan ||
+            item.metode ||
+            ''
+          )}
+        </div>
+
+        <div class="transaction-date">
+          ${formatDate(item.tanggal)}
+        </div>
+
+      </div>
+
+
+      <div
+        class="transaction-amount ${colorClass}">
+
+        ${income ? '+' : '-'}
+        ${formatRupiah(item.nominal)}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   OPEN TRANSACTION
+========================================================= */
+
+function openTransactionModal() {
+
+  editingTransaction =
+    false;
+
+
+  document
+    .getElementById(
+      'transactionModalTitle'
+    )
+    .textContent =
+    'Tambah Transaksi';
+
+
+  document
+    .getElementById(
+      'transactionId'
+    )
+    .value =
+    '';
+
+
+  document
+    .getElementById(
+      'formTanggal'
+    )
+    .value =
+    new Date()
+      .toISOString()
+      .slice(
+        0,
+        10
+      );
+
+
+  document
+    .getElementById(
+      'formTipe'
+    )
+    .value =
+    '';
+
+
+  document
+    .getElementById(
+      'formKategori'
+    )
+    .innerHTML =
+    '<option value="">Pilih kategori</option>';
+
+
+  document
+    .getElementById(
+      'formNominal'
+    )
+    .value =
+    '';
+
+
+  document
+    .getElementById(
+      'formMetode'
+    )
+    .value =
+    'Cash';
+
+
+  document
+    .getElementById(
+      'formKeterangan'
+    )
+    .value =
+    '';
+
+
+  document
+    .getElementById(
+      'deleteTransactionButton'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'transactionModal'
+    )
+    .classList
+    .add('show');
+
+}
+
+
+/* =========================================================
+   EDIT TRANSACTION
+========================================================= */
+
+async function editTransaction(
+  id
+) {
+
+  try {
+
+    const response =
+      await apiRequest(
+        'transaction',
+        {
+          id:
+            id
+        }
+      );
+
+
+    const data =
+      response.data;
+
+
+    editingTransaction =
+      true;
+
+
+    document
+      .getElementById(
+        'transactionModalTitle'
+      )
+      .textContent =
+      'Edit Transaksi';
+
+
+    document
+      .getElementById(
+        'transactionId'
+      )
+      .value =
+      data.id;
+
+
+    document
+      .getElementById(
+        'formTanggal'
+      )
+      .value =
+      data.tanggal;
+
+
+    document
+      .getElementById(
+        'formTipe'
+      )
+      .value =
+      data.tipe;
+
+
+    loadFormCategories(
+      data.kategori
+    );
+
+
+    document
+      .getElementById(
+        'formNominal'
+      )
+      .value =
+      data.nominal;
+
+
+    document
+      .getElementById(
+        'formMetode'
+      )
+      .value =
+      data.metode ||
+      'Cash';
+
+
+    document
+      .getElementById(
+        'formKeterangan'
+      )
+      .value =
+      data.keterangan ||
+      '';
+
+
+    document
+      .getElementById(
+        'deleteTransactionButton'
+      )
+      .style.display =
+      'block';
+
+
+    document
+      .getElementById(
+        'transactionModal'
+      )
+      .classList
+      .add('show');
+
+
+  } catch(error) {
+
+    showToast(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD FORM CATEGORY
+========================================================= */
+
+function loadFormCategories(
+  selected
+) {
+
+  const tipe =
+    document
+      .getElementById(
+        'formTipe'
+      )
+      .value;
+
+
+  const select =
+    document
+      .getElementById(
+        'formKategori'
+      );
+
+
+  const filtered =
+    categories.filter(
+      function(item) {
+
+        return (
+          item.tipe ===
+          tipe
         );
 
-      })
-      .catch(function(error) {
+      }
+    );
 
-        console.log(
-          'Service Worker gagal:',
-          error
+
+  select.innerHTML =
+    '<option value="">Pilih kategori</option>' +
+    filtered
+      .map(
+        function(item) {
+
+          return `
+
+            <option value="${escapeAttribute(item.kategori)}">
+              ${escapeHtml(item.kategori)}
+            </option>
+
+          `;
+
+        }
+      )
+      .join('');
+
+
+  if (
+    selected
+  ) {
+
+    select.value =
+      selected;
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE TRANSACTION
+========================================================= */
+
+async function saveTransaction() {
+
+  const data = {
+
+    id:
+      document
+        .getElementById(
+          'transactionId'
+        )
+        .value,
+
+    tanggal:
+      document
+        .getElementById(
+          'formTanggal'
+        )
+        .value,
+
+    tipe:
+      document
+        .getElementById(
+          'formTipe'
+        )
+        .value,
+
+    kategori:
+      document
+        .getElementById(
+          'formKategori'
+        )
+        .value,
+
+    nominal:
+      document
+        .getElementById(
+          'formNominal'
+        )
+        .value,
+
+    metode:
+      document
+        .getElementById(
+          'formMetode'
+        )
+        .value,
+
+    keterangan:
+      document
+        .getElementById(
+          'formKeterangan'
+        )
+        .value
+
+  };
+
+
+  if (
+    !data.tanggal ||
+    !data.tipe ||
+    !data.kategori ||
+    !data.nominal
+  ) {
+
+    showToast(
+      'Lengkapi data transaksi.'
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document
+      .getElementById(
+        'saveTransactionButton'
+      );
+
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    'Menyimpan...';
+
+
+  try {
+
+    if (
+      editingTransaction
+    ) {
+
+      await apiRequest(
+        'updateTransaction',
+        data
+      );
+
+      showToast(
+        'Transaksi berhasil diperbarui.'
+      );
+
+    }
+
+    else {
+
+      await apiRequest(
+        'addTransaction',
+        data
+      );
+
+      showToast(
+        'Transaksi berhasil disimpan.'
+      );
+
+    }
+
+
+    closeTransactionModal();
+
+
+    await loadDashboard();
+
+
+  } catch(error) {
+
+    showToast(
+      error.message
+    );
+
+  }
+
+
+  button.disabled =
+    false;
+
+  button.textContent =
+    'Simpan';
+
+}
+
+
+/* =========================================================
+   DELETE CURRENT
+========================================================= */
+
+async function deleteCurrentTransaction() {
+
+  const id =
+    document
+      .getElementById(
+        'transactionId'
+      )
+      .value;
+
+
+  if (!id) {
+    return;
+  }
+
+
+  const confirmDelete =
+    confirm(
+      'Hapus transaksi ini?'
+    );
+
+
+  if (!confirmDelete) {
+    return;
+  }
+
+
+  try {
+
+    await apiRequest(
+      'deleteTransaction',
+      {
+        id:
+          id
+      }
+    );
+
+
+    closeTransactionModal();
+
+
+    showToast(
+      'Transaksi berhasil dihapus.'
+    );
+
+
+    await loadDashboard();
+
+
+  } catch(error) {
+
+    showToast(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   BUDGET
+========================================================= */
+
+async function openBudgetModal() {
+
+  try {
+
+    const response =
+      await apiRequest(
+        'budget'
+      );
+
+
+    document
+      .getElementById(
+        'budgetInput'
+      )
+      .value =
+      response.budget ||
+      0;
+
+
+    document
+      .getElementById(
+        'budgetModal'
+      )
+      .classList
+      .add('show');
+
+
+  } catch(error) {
+
+    showToast(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE BUDGET
+========================================================= */
+
+async function saveBudget() {
+
+  const value =
+    document
+      .getElementById(
+        'budgetInput'
+      )
+      .value;
+
+
+  if (
+    value === ''
+    ||
+    Number(value) < 0
+  ) {
+
+    showToast(
+      'Budget tidak valid.'
+    );
+
+    return;
+
+  }
+
+
+  try {
+
+    await apiRequest(
+      'updateBudget',
+      {
+        value:
+          value
+      }
+    );
+
+
+    closeBudgetModal();
+
+
+    showToast(
+      'Budget berhasil diperbarui.'
+    );
+
+
+    await loadDashboard();
+
+
+  } catch(error) {
+
+    showToast(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   REPORT
+========================================================= */
+
+async function loadReport() {
+
+  const month =
+    getSelectedMonth();
+
+
+  try {
+
+    const response =
+      await apiRequest(
+        'report',
+        {
+          month:
+            month
+        }
+      );
+
+
+    const data =
+      response.data;
+
+
+    document
+      .getElementById(
+        'reportInsight'
+      )
+      .textContent =
+      data.insight ||
+      '-';
+
+
+    document
+      .getElementById(
+        'reportIncome'
+      )
+      .textContent =
+      formatRupiah(
+        data.pemasukan
+      );
+
+
+    document
+      .getElementById(
+        'reportExpense'
+      )
+      .textContent =
+      formatRupiah(
+        data.pengeluaran
+      );
+
+
+    document
+      .getElementById(
+        'reportBalance'
+      )
+      .textContent =
+      formatRupiah(
+        data.saldo
+      );
+
+
+    document
+      .getElementById(
+        'reportBudget'
+      )
+      .textContent =
+      formatRupiah(
+        data.budget
+      );
+
+
+    const container =
+      document
+        .getElementById(
+          'reportCategories'
         );
 
-      });
 
-  });
+    if (
+      !data.kategori ||
+      data.kategori.length === 0
+    ) {
+
+      container.innerHTML =
+        '<div class="empty">Belum ada data.</div>';
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      data.kategori
+        .map(
+          function(item) {
+
+            return `
+
+              <div class="category-item">
+
+                <div class="category-left">
+
+                  <div class="category-dot"></div>
+
+                  <div class="category-name">
+                    ${escapeHtml(item.kategori)}
+                  </div>
+
+                </div>
+
+                <div class="category-amount">
+                  ${formatRupiah(item.nominal)}
+                </div>
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join('');
+
+
+  } catch(error) {
+
+    showToast(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(
+  page
+) {
+
+  currentPage =
+    page;
+
+
+  const pages = {
+
+    home:
+      'pageHome',
+
+    transactions:
+      'pageTransactions',
+
+    report:
+      'pageReport',
+
+    profile:
+      'pageProfile'
+
+  };
+
+
+  Object.keys(
+    pages
+  ).forEach(
+    function(key) {
+
+      const element =
+        document
+          .getElementById(
+            pages[key]
+          );
+
+
+      if (!element) {
+        return;
+      }
+
+
+      element.classList.toggle(
+        'active',
+        key === page
+      );
+
+    }
+  );
+
+
+  document
+    .querySelectorAll(
+      '.nav-item'
+    )
+    .forEach(
+      function(item) {
+
+        item.classList.remove(
+          'active'
+        );
+
+      }
+    );
+
+
+  if (
+    page === 'home'
+  ) {
+
+    document
+      .getElementById(
+        'navHome'
+      )
+      .classList
+      .add('active');
+
+  }
+
+
+  if (
+    page ===
+    'transactions'
+  ) {
+
+    document
+      .getElementById(
+        'navTransactions'
+      )
+      .classList
+      .add('active');
+
+  }
+
+
+  if (
+    page === 'report'
+  ) {
+
+    document
+      .getElementById(
+        'navReport'
+      )
+      .classList
+      .add('active');
+
+
+    loadReport();
+
+  }
+
+}
+
+
+/* =========================================================
+   MONTH
+========================================================= */
+
+function setDefaultMonth() {
+
+  const now =
+    new Date();
+
+
+  const month =
+    now
+      .toISOString()
+      .slice(
+        0,
+        7
+      );
+
+
+  document
+    .getElementById(
+      'monthInput'
+    )
+    .value =
+    month;
+
+
+  document
+    .getElementById(
+      'transactionMonth'
+    )
+    .value =
+    month;
+
+
+  document
+    .getElementById(
+      'monthInput'
+    )
+    .addEventListener(
+      'change',
+      async function() {
+
+        await loadDashboard();
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      'transactionMonth'
+    )
+    .addEventListener(
+      'change',
+      async function() {
+
+        await loadTransactions(
+          this.value
+        );
+
+      }
+    );
+
+}
+
+
+function getSelectedMonth() {
+
+  return (
+    document
+      .getElementById(
+        'monthInput'
+      )
+      .value
+  );
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeTransactionModal() {
+
+  document
+    .getElementById(
+      'transactionModal'
+    )
+    .classList
+    .remove('show');
+
+}
+
+
+function closeBudgetModal() {
+
+  document
+    .getElementById(
+      'budgetModal'
+    )
+    .classList
+    .remove('show');
+
+}
+
+
+function closeModalOutside(
+  event
+) {
+
+  if (
+    event.target ===
+    event.currentTarget
+  ) {
+
+    event.currentTarget
+      .classList
+      .remove('show');
+
+  }
+
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function initializeTheme() {
+
+  const dark =
+    localStorage.getItem(
+      'neracaku_dark'
+    ) === '1';
+
+
+  if (dark) {
+
+    document.body
+      .classList
+      .add('dark');
+
+  }
+
+}
+
+
+function toggleDarkMode() {
+
+  const isDark =
+    document.body
+      .classList
+      .toggle('dark');
+
+
+  localStorage.setItem(
+    'neracaku_dark',
+    isDark
+      ? '1'
+      : '0'
+  );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+async function refreshApp() {
+
+  showToast(
+    'Memuat ulang...'
+  );
+
+
+  try {
+
+    await loadDashboard();
+
+
+    if (
+      currentPage ===
+      'report'
+    ) {
+
+      await loadReport();
+
+    }
+
+
+    showToast(
+      'Data berhasil diperbarui.'
+    );
+
+
+  } catch(error) {
+
+    showToast(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+function formatRupiah(
+  number
+) {
+
+  return (
+    'Rp ' +
+    Number(
+      number
+    || 0
+    )
+      .toLocaleString(
+        'id-ID'
+      )
+  );
+
+}
+
+
+function formatDate(
+  value
+) {
+
+  if (!value) {
+    return '-';
+  }
+
+
+  const parts =
+    value.split('-');
+
+
+  if (
+    parts.length !== 3
+  ) {
+
+    return value;
+
+  }
+
+
+  return (
+    parts[2] +
+    '/' +
+    parts[1] +
+    '/' +
+    parts[0]
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(
+  message
+) {
+
+  const toast =
+    document
+      .getElementById(
+        'toast'
+      );
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList
+    .add('show');
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      function() {
+
+        toast.classList
+          .remove('show');
+
+      },
+      2500
+    );
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(
+  message
+) {
+
+  document
+    .getElementById(
+      'loadingScreen'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'app'
+    )
+    .style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'errorScreen'
+    )
+    .style.display =
+    'flex';
+
+
+  document
+    .getElementById(
+      'errorMessage'
+    )
+    .textContent =
+    message;
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value ||
+    ''
+  )
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
+}
+
+
+function escapeAttribute(
+  value
+) {
+
+  return String(
+    value ||
+    ''
+  )
+    .replace(
+      /'/g,
+      "\\'"
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    );
+
+}
+
+
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
+
+if (
+  'serviceWorker' in navigator
+) {
+
+  window.addEventListener(
+    'load',
+    function() {
+
+      navigator
+        .serviceWorker
+        .register(
+          './sw.js'
+        )
+        .catch(
+          function(error) {
+
+            console.log(
+              'Service Worker:',
+              error
+            );
+
+          }
+        );
+
+    }
+  );
 
 }
 
