@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#111827">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="apple-mobile-web-app-title" content="NeracaKu">
+
+<link rel="apple-touch-icon" href="icon-192.png">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,
+             initial-scale=1.0,
+             maximum-scale=1.0,
+             user-scalable=no,
+             viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#111827"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="NeracaKu"
+  >
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="application-name"
+    content="NeracaKu"
+  >
+
+  <meta
+    name="description"
+    content="NeracaKu - Personal Finance"
+  >
+
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="icon-192.png"
+  >
+
+  <title>NeracaKu</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    html,
+    body {
+
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+
+      background: #111827;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    }
+
+
+    body {
+
+      padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+
+    }
+
+
+    #app {
+
+      width: 100%;
+      height: 100%;
+
+      position: relative;
+
+      background: #ffffff;
+
+      overflow: hidden;
+
+    }
+
+
+    #webapp {
+
+      width: 100%;
+      height: 100%;
+
+      border: none;
+
+      display: block;
+
+      background: #ffffff;
+
+    }
+
+
+    /* =====================================================
+       LOADING SCREEN
+       ===================================================== */
+
+    #loading {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9999;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      background:
+        linear-gradient(
+          145deg,
+          #111827,
+          #1f2937
+        );
+
+      color: #ffffff;
+
+      transition:
+        opacity .35s ease,
+        visibility .35s ease;
+
+    }
+
+
+    #loading.hide {
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+    }
+
+
+    .logo {
+
+      width: 72px;
+      height: 72px;
+
+      border-radius: 22px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background: #ffffff;
+
+      color: #111827;
+
+      font-size: 30px;
+
+      font-weight: 800;
+
+      margin-bottom: 18px;
+
+      box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.25);
+
+    }
+
+
+    .app-name {
+
+      font-size: 24px;
+
+      font-weight: 800;
+
+      letter-spacing: -.5px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .loading-text {
+
+      font-size: 13px;
+
+      opacity: .7;
+
+    }
+
+
+    .loader {
+
+      width: 28px;
+      height: 28px;
+
+      border-radius: 50%;
+
+      border: 3px solid
+        rgba(255,255,255,.2);
+
+      border-top-color: #ffffff;
+
+      animation:
+        spin .8s linear infinite;
+
+      margin-top: 20px;
+
+    }
+
+
+    @keyframes spin {
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    /* =====================================================
+       ERROR SCREEN
+       ===================================================== */
+
+    #error {
+
+      display: none;
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 10000;
+
+      padding: 30px;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      text-align: center;
+
+      background: #ffffff;
+
+    }
+
+
+    #error.show {
+
+      display: flex;
+
+    }
+
+
+    .error-icon {
+
+      font-size: 52px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .error-title {
+
+      font-size: 22px;
+
+      font-weight: 800;
+
+      color: #111827;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .error-description {
+
+      max-width: 320px;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      color: #6b7280;
+
+      margin-bottom: 22px;
+
+    }
+
+
+    .retry-button {
+
+      border: none;
+
+      background: #111827;
+
+      color: #ffffff;
+
+      padding: 13px 22px;
+
+      border-radius: 12px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+    }
+
+
+    /* =====================================================
+       IOS INSTALL GUIDE
+       ===================================================== */
+
+    #ios-guide {
+
+      display: none;
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 11000;
+
+      background:
+        rgba(0,0,0,.55);
+
+      align-items: flex-end;
+
+      justify-content: center;
+
+    }
+
+
+    #ios-guide.show {
+
+      display: flex;
+
+    }
+
+
+    .ios-box {
+
+      width: 100%;
+
+      max-width: 520px;
+
+      background: #ffffff;
+
+      border-radius:
+        24px 24px 0 0;
+
+      padding:
+        24px
+        22px
+        calc(24px + env(safe-area-inset-bottom));
+
+      animation:
+        slideUp .25s ease;
+
+    }
+
+
+    @keyframes slideUp {
+
+      from {
+
+        transform:
+          translateY(100%);
+
+      }
+
+      to {
+
+        transform:
+          translateY(0);
+
+      }
+
+    }
+
+
+    .ios-title {
+
+      font-size: 20px;
+
+      font-weight: 800;
+
+      color: #111827;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .ios-text {
+
+      color: #6b7280;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .ios-step {
+
+      display: flex;
+
+      gap: 12px;
+
+      margin-bottom: 13px;
+
+      color: #374151;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .ios-number {
+
+      width: 26px;
+      height: 26px;
+
+      min-width: 26px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: #111827;
+
+      color: #ffffff;
+
+      font-weight: 700;
+
+    }
+
+
+    .close-guide {
+
+      width: 100%;
+
+      border: none;
+
+      background: #111827;
+
+      color: #ffffff;
+
+      padding: 14px;
+
+      border-radius: 13px;
+
+      font-weight: 700;
+
+      font-size: 14px;
+
+      margin-top: 10px;
+
+    }
+
+
+    /* =====================================================
+       OFFLINE MESSAGE
+       ===================================================== */
+
+    #offline {
+
+      position: fixed;
+
+      left: 50%;
+
+      bottom:
+        calc(
+          18px +
+          env(safe-area-inset-bottom)
+        );
+
+      transform:
+        translateX(-50%)
+        translateY(100px);
+
+      z-index: 12000;
+
+      background: #111827;
+
+      color: #ffffff;
+
+      padding: 11px 16px;
+
+      border-radius: 12px;
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.25);
+
+      transition:
+        transform .3s ease;
+
+      white-space: nowrap;
+
+    }
+
+
+    #offline.show {
+
+      transform:
+        translateX(-50%)
+        translateY(0);
+
+    }
+
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div id="app">
+
+    <iframe
+      id="webapp"
+      title="NeracaKu"
+      allow="clipboard-read; clipboard-write"
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  <div id="loading">
+
+    <div class="logo">
+      N
+    </div>
+
+    <div class="app-name">
+      NeracaKu
+    </div>
+
+    <div class="loading-text">
+      Memuat aplikasi...
+    </div>
+
+    <div class="loader"></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ERROR
+       ===================================================== -->
+
+  <div id="error">
+
+    <div class="error-icon">
+      ⚠️
+    </div>
+
+    <div class="error-title">
+      NeracaKu tidak dapat dibuka
+    </div>
+
+    <div class="error-description">
+      Periksa koneksi internet atau pastikan
+      URL Google Apps Script sudah benar.
+    </div>
+
+    <button
+      class="retry-button"
+      onclick="loadApp()">
+      Coba Lagi
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       IOS GUIDE
+       ===================================================== -->
+
+  <div id="ios-guide">
+
+    <div class="ios-box">
+
+      <div class="ios-title">
+        📱 Pasang NeracaKu
+      </div>
+
+      <div class="ios-text">
+        Agar NeracaKu tampil seperti aplikasi,
+        tambahkan ke Home Screen iPhone.
+      </div>
+
+
+      <div class="ios-step">
+
+        <div class="ios-number">
+          1
+        </div>
+
+        <div>
+          Buka halaman ini menggunakan
+          <strong>Safari</strong>.
+        </div>
+
+      </div>
+
+
+      <div class="ios-step">
+
+        <div class="ios-number">
+          2
+        </div>
+
+        <div>
+          Tekan tombol
+          <strong>Share / Bagikan</strong>.
+        </div>
+
+      </div>
+
+
+      <div class="ios-step">
+
+        <div class="ios-number">
+          3
+        </div>
+
+        <div>
+          Pilih
+          <strong>Add to Home Screen /
+          Tambahkan ke Layar Utama</strong>.
+        </div>
+
+      </div>
+
+
+      <div class="ios-step">
+
+        <div class="ios-number">
+          4
+        </div>
+
+        <div>
+          Tekan <strong>Add /
+          Tambah</strong>.
+        </div>
+
+      </div>
+
+
+      <button
+        class="close-guide"
+        onclick="closeIOSGuide()">
+
+        Mengerti
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div id="offline">
+    Tidak ada koneksi internet
+  </div>
+
+
+  <script>
+
+
+    /* =====================================================
+       KONFIGURASI
+       ===================================================== */
+
+    const GAS_WEB_APP_URL =
+      'https://script.google.com/macros/s/AKfycbycDgtIw2OAHQW7qJsSS6WLbPCHwr_YM9n6tqnnvAIcVbCxX3aCvah66yQ-7yTrL7TyKA/exec';
+
+
+    /* =====================================================
+       ELEMENT
+       ===================================================== */
+
+    const iframe =
+      document.getElementById('webapp');
+
+    const loading =
+      document.getElementById('loading');
+
+    const errorBox =
+      document.getElementById('error');
+
+
+    /* =====================================================
+       LOAD APP
+       ===================================================== */
+
+    function loadApp() {
+
+      errorBox.classList.remove('show');
+
+      loading.classList.remove('hide');
+
+
+      if (
+        !GAS_WEB_APP_URL ||
+        GAS_WEB_APP_URL.indexOf('PASTE_URL') !== -1
+      ) {
+
+        loading.classList.add('hide');
+
+        errorBox.classList.add('show');
+
+        return;
+
+      }
+
+
+      iframe.src =
+        GAS_WEB_APP_URL +
+        '?pwa=1';
+
+
+      iframe.onload =
+        function() {
+
+          setTimeout(
+            function() {
+
+              loading.classList.add('hide');
+
+            },
+            700
+          );
+
+        };
+
+
+      iframe.onerror =
+        function() {
+
+          loading.classList.add('hide');
+
+          errorBox.classList.add('show');
+
+        };
+
+    }
+
+
+    /* =====================================================
+       SERVICE WORKER
+       ===================================================== */
+
+    if (
+      'serviceWorker'
+      in navigator
+    ) {
+
+      window.addEventListener(
+        'load',
+        function() {
+
+          navigator.serviceWorker
+            .register('./sw.js')
+            .then(
+              function(registration) {
+
+                console.log(
+                  'NeracaKu PWA aktif:',
+                  registration.scope
+                );
+
+              }
+            )
+            .catch(
+              function(error) {
+
+                console.log(
+                  'Service Worker gagal:',
+                  error
+                );
+
+              }
+            );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       ONLINE / OFFLINE
+       ===================================================== */
+
+    const offline =
+      document.getElementById('offline');
+
+
+    function updateConnection() {
+
+      if (
+        navigator.onLine
+      ) {
+
+        offline.classList.remove(
+          'show'
+        );
+
+      }
+      else {
+
+        offline.classList.add(
+          'show'
+        );
+
+      }
+
+    }
+
+
+    window.addEventListener(
+      'online',
+      updateConnection
+    );
+
+
+    window.addEventListener(
+      'offline',
+      updateConnection
+    );
+
+
+    /* =====================================================
+       IOS DETECTION
+       ===================================================== */
+
+    function isIOS() {
+
+      return (
+        /iPad|iPhone|iPod/.test(
+          navigator.userAgent
+        )
+        &&
+        !window.MSStream
+      );
+
+    }
+
+
+    function isStandalone() {
+
+      return (
+        window.navigator.standalone === true
+        ||
+        window.matchMedia(
+          '(display-mode: standalone)'
+        ).matches
+      );
+
+    }
+
+
+    function showIOSGuide() {
+
+      if (
+        isIOS()
+        &&
+        !isStandalone()
+      ) {
+
+        setTimeout(
+          function() {
+
+            document
+              .getElementById(
+                'ios-guide'
+              )
+              .classList.add(
+                'show'
+              );
+
+          },
+          2500
+        );
+
+      }
+
+    }
+
+
+    function closeIOSGuide() {
+
+      document
+        .getElementById(
+          'ios-guide'
+        )
+        .classList.remove(
+          'show'
+        );
+
+    }
+
+
+    /* =====================================================
+       PREVENT DOUBLE TAP ZOOM
+       ===================================================== */
+
+    let lastTouchEnd = 0;
+
+
+    document.addEventListener(
+      'touchend',
+      function(event) {
+
+        const now =
+          Date.now();
+
+
+        if (
+          now - lastTouchEnd <= 300
+        ) {
+
+          event.preventDefault();
+
+        }
+
+
+        lastTouchEnd =
+          now;
+
+      },
+      {
+        passive: false
+      }
+    );
+
+
+    /* =====================================================
+       START
+       ===================================================== */
+
+    loadApp();
+
+    updateConnection();
+
+    showIOSGuide();
+
+
+  <script>
+
+if ('serviceWorker' in navigator) {
+
+  window.addEventListener('load', function() {
+
+    navigator.serviceWorker
+      .register('./sw.js')
+      .then(function(registration) {
+
+        console.log(
+          'NeracaKu Service Worker aktif:',
+          registration.scope
+        );
+
+      })
+      .catch(function(error) {
+
+        console.log(
+          'Service Worker gagal:',
+          error
+        );
+
+      });
+
+  });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
